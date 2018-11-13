@@ -5,8 +5,11 @@ class ChallengesController < ApplicationController
   def mobile_send
     phone_number = params[:challenge][:phone_number]
     (redirect_to root_path and return) unless valid_number?(phone_number)
+    phone_number = format_number(phone_number)
     cookies[:phone_number] = phone_number
-    cookies[:code] = '1234'
+    code = generate_code
+    cookies[:code] = code
+    send_sms(code, phone_number)
     redirect_to challenges_code_confirm_path
   end
 
@@ -33,6 +36,11 @@ class ChallengesController < ApplicationController
 
   private
 
+  def generate_code
+    # rand.to_s[2..5]
+    '1234'
+  end
+
   def valid_number?(phone_number)
     !!(phone_number =~ /^(?:0|44)(\d+)$/)
   end
@@ -44,4 +52,20 @@ class ChallengesController < ApplicationController
     end
     phone_number
   end
+
+  def send_sms(code, number)
+    client = ZenSend::Client.new(ENV['ZENSEND_API_KEY'])
+    begin
+      result = client.send_sms(
+        originator: '447434984592',
+        originator_type: 'msisdn',
+        numbers: [number],
+        body: code
+      )
+      puts result.inspect
+    rescue ZenSend::ZenSendException => e
+      flash[:warning] = "ZenSendException: #{e.parameter} => #{e.failcode}"
+    end
+  end
+
 end
