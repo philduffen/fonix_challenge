@@ -15,7 +15,19 @@ class ChallengesController < ApplicationController
   end
 
   def code_check
-  	
+    code = params[:challenge][:code]
+    if code == cookies[:code]
+      flash[:notice] = 'Want another go?'
+      render(
+        html: "Contratulations!<script>alert('Success!')</script>".html_safe,
+        application: true
+      )
+    else
+      flash[:notice] = "Try again! #{cookies[:code]}" 
+      redirect_to root_path
+    end
+      cookies.delete :code
+      cookies.delete :phone_number
   end
 
   private
