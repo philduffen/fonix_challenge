@@ -37,8 +37,7 @@ class ChallengesController < ApplicationController
   private
 
   def generate_code
-    # rand.to_s[2..5]
-    '1234'
+    rand.to_s[2..5]
   end
 
   def valid_number?(phone_number)
