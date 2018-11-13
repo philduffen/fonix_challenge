@@ -1,24 +1,22 @@
-# README
+# Fonix Challenge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ - end to end is working as per the challenge.
+ - additonal error checking (required)
+ - more comprehenive tests (required)
+ - refactoring (required)
 
-Things you may want to cover:
+* Ruby 2.5.1
 
-* Ruby version
+* Rails 5.2.1
 
-* System dependencies
+* git clone https://github.com/philduffen/fonix_challenge.git
 
-* Configuration
+* bundle install
 
-* Database creation
+* phone number is UK mobile number format i.e. starting with 07.
 
-* Database initialization
+* localhost:3000/ will give you the start page
 
-* How to run the test suite
+* 4 digit code will be sent via SMS to phone with number entered on first page.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Confirmation if correct - return to start page if not.
