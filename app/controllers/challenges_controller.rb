@@ -20,7 +20,7 @@ class ChallengesController < ApplicationController
     if code == cookies[:code]
       flash[:notice] = 'Want another go?'
       render(
-        html: "Contratulations!<script>alert('Success!')</script>".html_safe,
+        html: "Congratulations!<script>alert('Success!')</script>".html_safe,
         application: true
       )
     else
