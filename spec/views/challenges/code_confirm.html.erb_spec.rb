@@ -13,5 +13,6 @@ RSpec.describe "challenges/code_confirm.html.erb", type: :view do
     expect(current_path).to eq challenges_code_confirm_path
     fill_in 'challenge_code', with: '1234'
     click_on 'Confirm!'
+    expect(page).to have_content("Contratulations")
   end
 end

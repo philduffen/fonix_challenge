@@ -6,6 +6,7 @@ class ChallengesController < ApplicationController
     phone_number = params[:challenge][:phone_number]
     (redirect_to root_path and return) unless valid_number?(phone_number)
     cookies[:phone_number] = phone_number
+    cookies[:code] = '1234'
     redirect_to challenges_code_confirm_path
   end
 
