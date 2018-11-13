@@ -1,0 +1,7 @@
+<h3>Your phone number is <%= @phone_number %> </h3>
+<h3>Your code number is <%= @code %> </h3>
+<p>When you receive a code via sms on this phone enter it below</p>
+<%= form_for :challenge, url: "code_check" do |form| %>
+  <%= form.number_field :code %>
+  <%= form.submit "Confirm!" %>
+<% end  %>
