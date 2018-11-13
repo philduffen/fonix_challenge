@@ -15,8 +15,15 @@ class ChallengesController < ApplicationController
 
   private
 
-  def format_number(number)
-  	cookies[:phone_number]
+  def valid_number?(phone_number)
+    !!(phone_number =~ /^(?:0|44)(\d+)$/)
   end
 
+  def format_number(phone_number)
+    if phone_number[0] == '0'
+      phone_number.slice!(0)
+      phone_number.prepend('44')
+    end
+    phone_number
+  end
 end
