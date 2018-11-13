@@ -4,6 +4,7 @@ class ChallengesController < ApplicationController
 
   def mobile_send
     phone_number = params[:challenge][:phone_number]
+    (redirect_to root_path and return) unless valid_number?(phone_number)
     cookies[:phone_number] = phone_number
     redirect_to challenges_code_confirm_path
   end
@@ -11,6 +12,10 @@ class ChallengesController < ApplicationController
   def code_confirm
     @phone_number = format_number(cookies[:phone_number])
     @code = cookies[:code]
+  end
+
+  def code_check
+  	
   end
 
   private
