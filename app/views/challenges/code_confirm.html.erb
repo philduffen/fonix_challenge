@@ -1,4 +1,5 @@
 <h3>When you receive a code via sms on this phone enter it below</h3>
+<p>If you don't receive a code within a few minutes hit back button and try again</p>p>
 <%= form_for :challenge, url: "code_check" do |form| %>
   <%= form.number_field :code %>
   <%= form.submit "Confirm!" %>

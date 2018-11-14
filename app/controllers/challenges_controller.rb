@@ -6,10 +6,9 @@ class ChallengesController < ApplicationController
     phone_number = params[:challenge][:phone_number]
     (redirect_to root_path and return) unless valid_number?(phone_number)
     phone_number = format_number(phone_number)
-    cookies[:phone_number] = phone_number
     code = generate_code
-    cookies[:code] = code
-    send_sms(code, phone_number)
+    store_values(phone_number, code)
+    ZensendService.send_sms(code, phone_number)
     redirect_to challenges_code_confirm_path
   end
 
@@ -52,19 +51,8 @@ class ChallengesController < ApplicationController
     phone_number
   end
 
-  def send_sms(code, number)
-    client = ZenSend::Client.new(ENV['ZENSEND_API_KEY'])
-    begin
-      result = client.send_sms(
-        originator: '447434984592',
-        originator_type: 'msisdn',
-        numbers: [number],
-        body: code
-      )
-      puts result.inspect
-    rescue ZenSend::ZenSendException => e
-      flash[:warning] = "ZenSendException: #{e.parameter} => #{e.failcode}"
-    end
+  def store_values(phone_number, code)
+    cookies[:code] = code
+    cookies[:phone_number] = phone_number
   end
-
 end
