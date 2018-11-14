@@ -20,3 +20,10 @@
 * 4 digit code will be sent via SMS to phone with number entered on first page.
 
 * Confirmation if correct - return to start page if not.
+
+
+Note: one of the spec tests will fail at the moment. To get it to pass change the following method in challenges_controller.rb
+
+  def generate_code
+    rand.to_s[2..5] <- subsitute with the code string e.g. '1234'
+  end
