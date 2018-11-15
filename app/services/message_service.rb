@@ -1,5 +1,4 @@
 class MessageService
-
   attr_accessor :phone_number, :message
 
   def initialize(phone_number, message=nil)
@@ -17,7 +16,7 @@ class MessageService
 
   private
 
-  def format_number(phone_number)
+  def format_number
     if @phone_number[0] == '0'
       @phone_number.slice!(0)
       @phone_number.prepend('44')
@@ -28,10 +27,10 @@ class MessageService
   def generate_code
     rand.to_s[2..5]
   end
-  
+
   def prepare_for_sending
     return unless valid_number?
-    format_number(phone_number)
+    format_number
   end
 end
 
