@@ -1,9 +1,11 @@
 class ChallengesController < ApplicationController
   def mobile_send
-    msg = MessageService.new(params[:challenge][:phone_number], '1234')
+    msg = MessageService.new(params[:challenge][:phone_number])
     msg.send_message
     cookies[:code] = msg.message
     redirect_to challenges_code_confirm_path
+  rescue StandardError
+    redirect_to root_path, error: 'Something went wrong'
   end
 
   def code_check
@@ -19,5 +21,7 @@ class ChallengesController < ApplicationController
       redirect_to root_path
     end
     cookies.delete :code
+  rescue StandardError
+    redirect_to root_path, error: 'Something went wrong'
   end
 end
