@@ -1,5 +1,5 @@
 <h3>Please enter your mobile number</h3>
 <%= form_for :challenge, url: "challenges" do |form| %>
-  <%= form.number_field :phone_number, class: 'phone_number' %>
+  <%= form.number_field :phone_number %>
   <%= form.submit "Confirm!"  %>
 <% end  %>
