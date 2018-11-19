@@ -10,11 +10,11 @@ class MessageService
     ZensendService.send_sms(@message, prepare_for_sending)
   end
 
+  private
+
   def valid_number?
     !!(@phone_number =~ /^(?:0|44)(\d+)$/)
   end
-
-  private
 
   def format_number
     if @phone_number[0] == '0'
