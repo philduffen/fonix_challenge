@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "challenges/code_confirm.html.erb", type: :view do
-
   before(:each) do
     @request.cookies[:phone_number] = "447585601232"  # This line is crucial!
     @request.cookies[:code] = cookies[:code]
   end
+
   it 'allows user to input code' do
     visit root_path
     fill_in 'challenge_phone_number', with: '07585601232'
@@ -23,7 +23,6 @@ RSpec.describe "challenges/code_confirm.html.erb", type: :view do
     click_on 'Confirm!'
     expect(page).to have_content("Congratulations")
   end
-
 
   it 'check sad path' do
     visit root_path

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# app/services/zensend_service.rb
 module ZensendService
   class << self
     def send_sms(code, number)
