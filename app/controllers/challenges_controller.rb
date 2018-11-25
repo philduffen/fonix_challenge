@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# app/controllers/challenges_controller.rb
 class ChallengesController < ApplicationController
   def mobile_send
     msg = MessageService.new(params[:challenge][:phone_number])
